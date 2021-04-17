@@ -2,8 +2,9 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class CiudadResidencia implements Serializable
@@ -13,8 +14,11 @@ public class CiudadResidencia implements Serializable
 
     private String nombreCiudadResidencia;
 
-    @OneToOne(mappedBy = "ciudadResidencia")
-    private Usuarios usuario;
+    @OneToMany(mappedBy = "ciudadResidencia")
+    private List<Usuario> usuarios;
+
+    @OneToMany(mappedBy = "ciudadResidencia")
+    private List<Lugar> lugares;
 
     public CiudadResidencia()
     {
@@ -37,12 +41,20 @@ public class CiudadResidencia implements Serializable
         this.nombreCiudadResidencia = nombreCiudadResidencia;
     }
 
-    public Usuarios getUsuario() {
-        return usuario;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public List<Lugar> getLugares() {
+        return lugares;
+    }
+
+    public void setLugares(List<Lugar> lugares) {
+        this.lugares = lugares;
     }
 
     @Override
