@@ -41,25 +41,25 @@ public class Usuario implements Serializable
     //tipo de usuario (administrador, moderador, usuario)
     private TipoUsuario tipoUsuario;
 
-    //lista de usuarios de un administrador para comvertir a moderadores
-    @OneToMany(mappedBy = "administrador")
+    //inverso de la relacion usuario-usuario
+    @OneToMany(mappedBy = "listaUsuariosAdministrador")
     private List<Usuario> listaUsuarios;
 
-    //lista de lugares para aprobar o negar de un moderador
+    //inverso de la relacion usuario-lugar
     @OneToMany(mappedBy = "moderador")
     private List<Lugar> lugares;
 
-    //lista de lugares creados por un usuario
+    //inverso de la relacion usuario-lugar
     @OneToMany(mappedBy = "autor")
     private List<Lugar> lugaresCreados;
 
-    //lista de favoritos de un usuario
+    //inverso de la relacion usuario-favorito
     @OneToMany(mappedBy = "usuario")
     private List<Favorito> favoritos;
 
-    //administrador que lo promovio de usuario a moderador
+    //lista de usuarios a los que tiene acceso el administrador
     @ManyToOne
-    private Usuario administrador;
+    private Usuario listaUsuariosAdministrador;
 
     //ciudad de residencia del usuario
     @ManyToOne
@@ -141,14 +141,14 @@ public class Usuario implements Serializable
         this.edad = edad;
     }
 
-    //obtener el administrador que lo promovio
-    public Usuario getAdministrador() {
-        return administrador;
+    //obtener la lista de todos los usuarios
+    public Usuario getListaUsuariosAdministrador() {
+        return listaUsuariosAdministrador;
     }
 
-    //poner el administrador que lo promovio
-    public void setAdministrador(Usuario administrador) {
-        this.administrador = administrador;
+    //poner la lista de todos los usuarios
+    public void setListaUsuariosAdministrador(Usuario listaUsuariosAdministrador) {
+        this.listaUsuariosAdministrador = listaUsuariosAdministrador;
     }
 
     //obtener la ciudad de residencia
@@ -161,12 +161,12 @@ public class Usuario implements Serializable
         this.ciudadResidencia = ciudadResidencia;
     }
 
-    //obtener la lista de usuarios de un administrador
+    //get del inverso de la relacion usuario-usuario
     public List<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }
 
-    //poner la lista de usuarios de un administrador
+    //set del inverso de la relacion usuario-usuario
     public void setListaUsuarios(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
     }
@@ -191,32 +191,32 @@ public class Usuario implements Serializable
         this.estadoCuenta = estadoCuenta;
     }
 
-    //obtener la lista de lugares del moderador
+    //get del inverso de la relacion usuario-lugar
     public List<Lugar> getLugares() {
         return lugares;
     }
 
-    //poner la lista de lugares del moderador
+    //set del inverso de la relacion usuario-lugar
     public void setLugares(List<Lugar> lugares) {
         this.lugares = lugares;
     }
 
-    //obtener la lista de lugares creados por el usuario
+    //get del inverso de la relacion usuario-lugar
     public List<Lugar> getLugaresCreados() {
         return lugaresCreados;
     }
 
-    //poner la lista de usuarios creados por el usuario
+    //set del inverso de la relacion usuario-lugar
     public void setLugaresCreados(List<Lugar> lugaresCreados) {
         this.lugaresCreados = lugaresCreados;
     }
 
-    //obtener la lista de favoritos de un usuario
+    //get del inverso de la relacion usuario-favorito
     public List<Favorito> getFavoritos() {
         return favoritos;
     }
 
-    //poner la lista de favoritos de un usuario
+    //set del inverso de la relacion usuario-favorito
     public void setFavoritos(List<Favorito> favoritos) {
         this.favoritos = favoritos;
     }
