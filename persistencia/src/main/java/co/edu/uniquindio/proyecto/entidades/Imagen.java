@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -8,33 +9,42 @@ import java.io.Serializable;
 @Entity
 public class Imagen implements Serializable
 {
+    //lugar que posee las fotos, primary key
     @Id
-    private String url;
-
     @ManyToOne
     private Lugar lugar;
 
+    //url de la foto
+    @Column(name = "url", length = 100)
+    private String url;
+
+    //metoco constructor de imagen
     public Imagen()
     {
         super();
     }
 
+    //obtiene la url de una imagen
     public String getUrl() {
         return url;
     }
 
+    //pone la url de la imagen
     public void setUrl(String url) {
         this.url = url;
     }
 
+    //obtiene un lugar
     public Lugar getLugar() {
         return lugar;
     }
 
+    //pone un lugar
     public void setLugar(Lugar lugar) {
         this.lugar = lugar;
     }
 
+    //map
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,11 +52,12 @@ public class Imagen implements Serializable
 
         Imagen imagen = (Imagen) o;
 
-        return url.equals(imagen.url);
+        return lugar != null ? lugar.equals(imagen.lugar) : imagen.lugar == null;
     }
 
+    //hash
     @Override
     public int hashCode() {
-        return url.hashCode();
+        return lugar != null ? lugar.hashCode() : 0;
     }
 }
