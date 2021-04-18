@@ -13,8 +13,8 @@ import java.util.List;
 public class TipoLugar implements Serializable
 {
     //codigo del tipo de local
-    @Column(name = "codigoTipoLugar", precision = 3)
     @Id
+    @Column(name = "codigoTipoLugar", precision = 3)
     private int codigoTipoLugar;
 
     //nombre del tipo de local

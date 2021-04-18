@@ -54,6 +54,10 @@ public class Lugar implements Serializable
     @OneToMany(mappedBy = "lugar")
     private List<Imagen> imagenes;
 
+    //inverso de la relacion lugar-comentario
+    @OneToMany(mappedBy = "lugar")
+    private List<Comentario> comentarios;
+
     //metodo constructor de lugar
     public Lugar()
     {
@@ -178,6 +182,16 @@ public class Lugar implements Serializable
     //set del inverso de la relacion lugar-favorito
     public void setFavoritos(List<Favorito> favoritos) {
         this.favoritos = favoritos;
+    }
+
+    //get del inverso de la relacion lugar-comentario
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    //set del inverso de la relacion lugar-comentario
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     //map
