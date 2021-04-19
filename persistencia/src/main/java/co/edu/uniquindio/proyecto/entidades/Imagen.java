@@ -15,13 +15,19 @@ public class Imagen implements Serializable
     private Lugar lugar;
 
     //url de la foto
-    @Column(name = "url", length = 100)
+    @Column(name = "url", nullable = false, length = 100)
     private String url;
 
-    //metoco constructor de imagen
+    //metoco super
     public Imagen()
     {
         super();
+    }
+
+    //metodo constructor
+    public Imagen(Lugar lugar, String url) {
+        this.lugar = lugar;
+        this.url = url;
     }
 
     //obtiene la url de una imagen
@@ -59,5 +65,13 @@ public class Imagen implements Serializable
     @Override
     public int hashCode() {
         return lugar != null ? lugar.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Imagen{" +
+                "lugar=" + lugar +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

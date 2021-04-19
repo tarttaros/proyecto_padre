@@ -19,12 +19,26 @@ public class Comentario implements Serializable
     private Usuario usuario;
 
     //comentario hecho al local
-    @Column(name = "comentario", length = 150)
+    @Column(name = "comentario", nullable = false, length = 150)
     private String comentario;
 
     //calificacion hecha al local
-    @Column(name = "calificacion", precision = 1)
+    @Column(name = "calificacion", nullable = true, precision = 1)
     private int calificacion;
+
+    //metodo super
+    public Comentario()
+    {
+        super();
+    }
+
+    //metodo constructor
+    public Comentario(Lugar lugar, Usuario usuario, String comentario, int calificacion) {
+        this.lugar = lugar;
+        this.usuario = usuario;
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+    }
 
     //obtiene el local al que le hicieron el comentario
     public Lugar getLugar() {
@@ -81,5 +95,15 @@ public class Comentario implements Serializable
     @Override
     public int hashCode() {
         return lugar != null ? lugar.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Comentario{" +
+                "lugar=" + lugar +
+                ", usuario=" + usuario +
+                ", comentario='" + comentario + '\'' +
+                ", calificacion=" + calificacion +
+                '}';
     }
 }

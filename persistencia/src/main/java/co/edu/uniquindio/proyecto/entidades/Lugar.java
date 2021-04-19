@@ -9,22 +9,24 @@ public class Lugar implements Serializable
 {
     //id del lugar, primary key
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     //nombre del local
-    @Column(name = "nombre", length = 100)
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
     //numero telefonico del lugar
-    @Column(name = "numeroTelefonico", length = 16)
+    @Column(name = "numeroTelefonico", nullable = false, length = 16)
     private String numeroTelefonico;
 
     //descripcion del lugar
-    @Column(name = "descripcion", length = 150)
+    @Column(name = "descripcion", nullable = false, length = 150)
     private String descripcion;
 
     //direccion del lugar
-    @Column(name = "direccion", length = 20)
+    @Column(name = "direccion", nullable = false, length = 20)
     private String direccion;
 
     //estado del lugar ( activo, inactivo o pendiente)
@@ -58,10 +60,24 @@ public class Lugar implements Serializable
     @OneToMany(mappedBy = "lugar")
     private List<Comentario> comentarios;
 
-    //metodo constructor de lugar
+    //metodo super
     public Lugar()
     {
         super();
+    }
+
+    //metodo constructor
+    public Lugar(String nombre, String numeroTelefonico, String descripcion, String direccion, EstadoLugar estadoLugar,
+                 Usuario autor, Usuario moderador, TipoLugar tipoLugar, CiudadResidencia ciudadResidencia) {
+        this.nombre = nombre;
+        this.numeroTelefonico = numeroTelefonico;
+        this.descripcion = descripcion;
+        this.direccion = direccion;
+        this.estadoLugar = estadoLugar;
+        this.autor = autor;
+        this.moderador = moderador;
+        this.tipoLugar = tipoLugar;
+        this.ciudadResidencia = ciudadResidencia;
     }
 
     //obtiene el nombre del lugar
@@ -209,5 +225,21 @@ public class Lugar implements Serializable
     @Override
     public int hashCode() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Lugar{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", numeroTelefonico='" + numeroTelefonico + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", estadoLugar=" + estadoLugar +
+                ", autor=" + autor +
+                ", moderador=" + moderador +
+                ", tipoLugar=" + tipoLugar +
+                ", ciudadResidencia=" + ciudadResidencia +
+                '}';
     }
 }

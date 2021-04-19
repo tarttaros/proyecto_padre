@@ -17,10 +17,16 @@ public class Favorito implements Serializable
     @ManyToOne
     private Lugar lugar;
 
-    //metodo constructor de favorito
+    //metodo super
     public Favorito()
     {
         super();
+    }
+
+    //metodo constructor
+    public Favorito(Usuario usuario, Lugar lugar) {
+        this.usuario = usuario;
+        this.lugar = lugar;
     }
 
     //obtiene un usuario de la lista
@@ -58,5 +64,13 @@ public class Favorito implements Serializable
     @Override
     public int hashCode() {
         return usuario != null ? usuario.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Favorito{" +
+                "usuario=" + usuario +
+                ", lugar=" + lugar +
+                '}';
     }
 }
