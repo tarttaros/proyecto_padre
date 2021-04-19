@@ -12,7 +12,7 @@ public class TipoLugar implements Serializable
     //codigo del tipo de local
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigoTipoLugar", precision = 3)
+    @Column(name = "codigoTipoLugar")
     private int codigoTipoLugar;
 
     //nombre del tipo de local

@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.test;
 
 import co.edu.uniquindio.proyecto.entidades.TipoLugar;
-import co.edu.uniquindio.proyecto.entidades.TipoUsuario;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.TipoLugarRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -42,7 +40,7 @@ public class TipoLugarTest
         TipoLugar tipoLugarGuardar = tipoLugarRepo.save(tipoLugar);
 
         //se elimina el registro
-        tipoLugarRepo.delete(tipoLugar);
+        tipoLugarRepo.delete(tipoLugarGuardar);
 
         //se verifica que si haya sido borrado
         TipoLugar tipoLugarEliminado = tipoLugarRepo.findById(1).orElse(null);
@@ -59,10 +57,10 @@ public class TipoLugarTest
         TipoLugar tipoLugarGuardar = tipoLugarRepo.save(tipoLugar);
 
         //se cambia el tipo de hotel a restaurante
-        tipoLugar.setNombreTipoLugar("Restaurante");
+        tipoLugarGuardar.setNombreTipoLugar("Restaurante");
 
         //se guarda el registro
-        tipoLugarRepo.save(tipoLugar);
+        tipoLugarRepo.save(tipoLugarGuardar);
 
         //Por último, verificamos que si haya quedado actualizado
         TipoLugar tipolugarBuscar = tipoLugarRepo.findById(1).orElse(null);

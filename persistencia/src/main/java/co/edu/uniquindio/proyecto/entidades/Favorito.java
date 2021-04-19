@@ -1,15 +1,17 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Favorito implements Serializable
-{
-    //usuario que tiene una lista de favoritos, primary key
+public class Favorito implements Serializable {
+    //primary key
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    //usuario que tiene una lista de favoritos
     @ManyToOne
     private Usuario usuario;
 
@@ -18,8 +20,7 @@ public class Favorito implements Serializable
     private Lugar lugar;
 
     //metodo super
-    public Favorito()
-    {
+    public Favorito() {
         super();
     }
 
@@ -27,6 +28,16 @@ public class Favorito implements Serializable
     public Favorito(Usuario usuario, Lugar lugar) {
         this.usuario = usuario;
         this.lugar = lugar;
+    }
+
+    //obtiene el id
+    public int getId() {
+        return id;
+    }
+
+    //pone el id
+    public void setId(int id) {
+        this.id = id;
     }
 
     //obtiene un usuario de la lista
@@ -57,19 +68,20 @@ public class Favorito implements Serializable
 
         Favorito favorito = (Favorito) o;
 
-        return usuario != null ? usuario.equals(favorito.usuario) : favorito.usuario == null;
+        return id == favorito.id;
     }
 
     //hash
     @Override
     public int hashCode() {
-        return usuario != null ? usuario.hashCode() : 0;
+        return id;
     }
 
     @Override
     public String toString() {
         return "Favorito{" +
-                "usuario=" + usuario +
+                "id=" + id +
+                ", usuario=" + usuario +
                 ", lugar=" + lugar +
                 '}';
     }
