@@ -2,10 +2,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import net.bytebuddy.implementation.bind.annotation.Super;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,21 +10,27 @@ import java.util.List;
 public class TipoLugar implements Serializable
 {
     //codigo del tipo de local
-    @Column(name = "codigoTipoLugar", precision = 3)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigoTipoLugar", precision = 3)
     private int codigoTipoLugar;
 
     //nombre del tipo de local
-    @Column(name = "nombreTipoLugar", length = 100)
+    @Column(name = "nombreTipoLugar", nullable = false, length = 100)
     private String nombreTipoLugar;
 
     //inverso de la relacion tipolugar-lugar
     @OneToMany(mappedBy = "tipoLugar")
     private List<Lugar> lugares;
 
-    //meotodo constructor tipolugar
+    //meotodo super
     public TipoLugar() {
         super();
+    }
+
+    //metodo constructor
+    public TipoLugar(String nombreTipoLugar) {
+        this.nombreTipoLugar = nombreTipoLugar;
     }
 
     //obtener el codigo del tipo de local
@@ -75,5 +78,13 @@ public class TipoLugar implements Serializable
     @Override
     public int hashCode() {
         return codigoTipoLugar;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoLugar{" +
+                "codigoTipoLugar=" + codigoTipoLugar +
+                ", nombreTipoLugar='" + nombreTipoLugar + '\'' +
+                '}';
     }
 }

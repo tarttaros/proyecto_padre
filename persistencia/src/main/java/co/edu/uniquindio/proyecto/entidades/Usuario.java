@@ -9,30 +9,32 @@ public class Usuario implements Serializable
 {
     //id del usuario, primary key
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     //nombre del usuario
-    @Column(name = "nombre", length = 100)
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
     //nickname del usuario
-    @Column(name = "nickname", length = 100)
+    @Column(name = "nickname", nullable = false, length = 100)
     private String nickname;
 
     //contraseña del usuario
-    @Column(name = "contraseña", length = 20)
+    @Column(name = "contraseña", nullable = false, length = 20)
     private String contraseña;
 
     //direccion del usuario (para encontrar su ubicacion)
-    @Column(name = "direccion", length = 100)
+    @Column(name = "direccion", nullable = false, length = 100)
     private String direccion;
 
     //correo del usuario
-    @Column(name = "correo", length = 25)
+    @Column(name = "correo", nullable = false, length = 25)
     private String correo;
 
     //edad del usuario
-    @Column(name = "edad", precision = 2)
+    @Column(name = "edad", nullable = false, precision = 2)
     private int edad;
 
     //estado de la cuenta de un usuario (activo - inactivo)
@@ -65,10 +67,24 @@ public class Usuario implements Serializable
     @ManyToOne
     private CiudadResidencia ciudadResidencia;
 
-    //metodo constructor de usuario
+    //metodo super
     public Usuario()
     {
         super();
+    }
+
+    //metodo constructor
+    public Usuario(String nombre, String nickname, String contraseña, String direccion, String correo, int edad,
+                   EstadoCuenta estadoCuenta, TipoUsuario tipoUsuario, CiudadResidencia ciudadResidencia) {
+        this.nombre = nombre;
+        this.nickname = nickname;
+        this.contraseña = contraseña;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.edad = edad;
+        this.estadoCuenta = estadoCuenta;
+        this.tipoUsuario = tipoUsuario;
+        this.ciudadResidencia = ciudadResidencia;
     }
 
     //obtener el id
@@ -236,5 +252,21 @@ public class Usuario implements Serializable
     @Override
     public int hashCode() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", contraseña='" + contraseña + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", correo='" + correo + '\'' +
+                ", edad=" + edad +
+                ", estadoCuenta=" + estadoCuenta +
+                ", tipoUsuario=" + tipoUsuario +
+                ", ciudadResidencia=" + ciudadResidencia +
+                '}';
     }
 }

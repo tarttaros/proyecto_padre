@@ -1,9 +1,8 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,11 +11,12 @@ public class CiudadResidencia implements Serializable
 {
     //codigo de la ciudad
     @Id
-    @Column(name = "codigoCiudadResidencia", precision = 3)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigoCiudadResidencia", nullable = false, precision = 3)
     private int codigoCiudadResidencia;
 
     //nombre de la ciudad
-    @Column(name = "nombreCiudadResidencia", length = 100)
+    @Column(name = "nombreCiudadResidencia", nullable = false, length = 100)
     private String nombreCiudadResidencia;
 
     //inverso de la relacion ciudad-usuario
@@ -27,10 +27,15 @@ public class CiudadResidencia implements Serializable
     @OneToMany(mappedBy = "ciudadResidencia")
     private List<Lugar> lugares;
 
-    //metodo constructor de ciudad
+    //metodo super
     public CiudadResidencia()
     {
         super();
+    }
+
+    //metodo constructor
+    public CiudadResidencia(String nombreCiudadResidencia) {
+        this.nombreCiudadResidencia = nombreCiudadResidencia;
     }
 
     //obtener el codigo de la ciudad
@@ -88,5 +93,13 @@ public class CiudadResidencia implements Serializable
     @Override
     public int hashCode() {
         return codigoCiudadResidencia;
+    }
+
+    @Override
+    public String toString() {
+        return "CiudadResidencia{" +
+                "codigoCiudadResidencia=" + codigoCiudadResidencia +
+                ", nombreCiudadResidencia='" + nombreCiudadResidencia + '\'' +
+                '}';
     }
 }
