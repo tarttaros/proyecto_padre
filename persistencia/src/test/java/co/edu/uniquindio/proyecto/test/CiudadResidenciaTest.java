@@ -39,10 +39,10 @@ public class CiudadResidenciaTest
         CiudadResidencia ciudad = new CiudadResidencia("Armenia");
 
         //se guarda el registro
-        ciudadResidenciaRepo.save(ciudad);
+        CiudadResidencia ciudadGuardada = ciudadResidenciaRepo.save(ciudad);
 
         //se elimina el registro
-        ciudadResidenciaRepo.delete(ciudad);
+        ciudadResidenciaRepo.delete(ciudadGuardada);
 
         //se verifica que si haya sido borrado
         CiudadResidencia ciudadEliminada = ciudadResidenciaRepo.findById(1).orElse(null);
@@ -78,19 +78,19 @@ public class CiudadResidenciaTest
         CiudadResidencia ciudad1 = new CiudadResidencia("Armenia");
 
         //se guarda el registro
-        ciudadResidenciaRepo.save(ciudad1);
+        CiudadResidencia ciudadGuardada = ciudadResidenciaRepo.save(ciudad1);
 
         //se crea una ciudad
         CiudadResidencia ciudad2 = new CiudadResidencia("Circacia");
 
         //se guarda el registro
-        ciudadResidenciaRepo.save(ciudad2);
+        CiudadResidencia ciudadGuardada1 = ciudadResidenciaRepo.save(ciudad2);
 
         //se crea una ciudad
         CiudadResidencia ciudad3 = new CiudadResidencia("Montenegro");
 
         //se guarda el registro
-        ciudadResidenciaRepo.save(ciudad3);
+        CiudadResidencia ciudadGuardada2 = ciudadResidenciaRepo.save(ciudad3);
 
         //Obtenemos la lista de todas las ciudades
         List<CiudadResidencia> lista = ciudadResidenciaRepo.findAll();

@@ -12,7 +12,7 @@ public class CiudadResidencia implements Serializable
     //codigo de la ciudad
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigoCiudadResidencia", nullable = false, precision = 3)
+    @Column(name = "codigoCiudadResidencia")
     private int codigoCiudadResidencia;
 
     //nombre de la ciudad

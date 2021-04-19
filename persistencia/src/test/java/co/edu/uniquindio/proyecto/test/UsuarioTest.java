@@ -30,7 +30,7 @@ public class UsuarioTest
         CiudadResidencia ciudad = new CiudadResidencia("Montenegro");
 
         //se guarda el registro
-        ciudadResidenciaRepo.save(ciudad);
+        CiudadResidencia ciudadGuardada = ciudadResidenciaRepo.save(ciudad);
 
         //se crea el usuario
         Usuario usuario = new Usuario("yuliam","nano","nano1","brrio 123",
@@ -50,7 +50,7 @@ public class UsuarioTest
         CiudadResidencia ciudad = new CiudadResidencia("Montenegro");
 
         //se guarda el registro
-        ciudadResidenciaRepo.save(ciudad);
+        CiudadResidencia ciudadGuardada = ciudadResidenciaRepo.save(ciudad);
 
         //se crea el usuario
         Usuario usuario = new Usuario("yuliam","nano","nano1","brrio 123",
@@ -60,7 +60,7 @@ public class UsuarioTest
         Usuario usuarioGuardado = usuarioRepo.save(usuario);
 
         //se elimina el registro
-        usuarioRepo.delete(usuario);
+        usuarioRepo.delete(usuarioGuardado);
 
         //se verifica que si haya sido borrado
         Usuario usuarioEliminado = usuarioRepo.findById(1).orElse(null);
@@ -74,7 +74,7 @@ public class UsuarioTest
         CiudadResidencia ciudad = new CiudadResidencia("Montenegro");
 
         //se guarda el registro
-        ciudadResidenciaRepo.save(ciudad);
+        CiudadResidencia ciudadGuardada = ciudadResidenciaRepo.save(ciudad);
 
         //se crea el usuario
         Usuario usuario = new Usuario("yuliam","nano","nano1","brrio 123",
@@ -87,7 +87,7 @@ public class UsuarioTest
         usuarioGuardado.setTipoUsuario(TipoUsuario.ADMINISTRADOR);
 
         //se guarda el registro
-        usuarioRepo.save(usuario);
+        usuarioRepo.save(usuarioGuardado);
 
         //Por último, verificamos que si haya quedado actualizado
         Usuario buscado = usuarioRepo.findById(1).orElse(null);
@@ -101,13 +101,13 @@ public class UsuarioTest
         CiudadResidencia ciudad = new CiudadResidencia("Montenegro");
 
         //se guarda el registro
-        ciudadResidenciaRepo.save(ciudad);
+        CiudadResidencia ciudadGuardada = ciudadResidenciaRepo.save(ciudad);
 
         //se crea la ciudad
         CiudadResidencia ciudad1 = new CiudadResidencia("Armenia");
 
         //se guarda el registro
-        ciudadResidenciaRepo.save(ciudad1);
+        CiudadResidencia ciudadGuardada1 = ciudadResidenciaRepo.save(ciudad1);
 
         //se crea el usuario
         Usuario usuario = new Usuario("yuliam","nano","nano1","brrio 123",

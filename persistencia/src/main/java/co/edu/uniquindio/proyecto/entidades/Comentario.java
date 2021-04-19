@@ -1,16 +1,19 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
+
 
 @Entity
 public class Comentario implements Serializable
 {
-    //local al que le hicieron el comentario, primary key
+    //primary key
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    //local al que le hicieron el comentario
     @ManyToOne
     private Lugar lugar;
 
@@ -38,6 +41,16 @@ public class Comentario implements Serializable
         this.usuario = usuario;
         this.comentario = comentario;
         this.calificacion = calificacion;
+    }
+
+    //obtiene el id
+    public int getId() {
+        return id;
+    }
+
+    //pone el id
+    public void setId(int id) {
+        this.id = id;
     }
 
     //obtiene el local al que le hicieron el comentario
@@ -88,19 +101,20 @@ public class Comentario implements Serializable
 
         Comentario that = (Comentario) o;
 
-        return lugar != null ? lugar.equals(that.lugar) : that.lugar == null;
+        return id == that.id;
     }
 
     //hash
     @Override
     public int hashCode() {
-        return lugar != null ? lugar.hashCode() : 0;
+        return id;
     }
 
     @Override
     public String toString() {
         return "Comentario{" +
-                "lugar=" + lugar +
+                "id=" + id +
+                ", lugar=" + lugar +
                 ", usuario=" + usuario +
                 ", comentario='" + comentario + '\'' +
                 ", calificacion=" + calificacion +

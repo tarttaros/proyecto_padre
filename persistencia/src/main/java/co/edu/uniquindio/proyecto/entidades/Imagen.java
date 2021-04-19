@@ -1,16 +1,18 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Imagen implements Serializable
 {
-    //lugar que posee las fotos, primary key
+    //primary key
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    //lugar que posee las fotos
     @ManyToOne
     private Lugar lugar;
 
@@ -28,6 +30,16 @@ public class Imagen implements Serializable
     public Imagen(Lugar lugar, String url) {
         this.lugar = lugar;
         this.url = url;
+    }
+
+    //obtiene el id
+    public int getId() {
+        return id;
+    }
+
+    //pone el id
+    public void setId(int id) {
+        this.id = id;
     }
 
     //obtiene la url de una imagen
@@ -58,19 +70,20 @@ public class Imagen implements Serializable
 
         Imagen imagen = (Imagen) o;
 
-        return lugar != null ? lugar.equals(imagen.lugar) : imagen.lugar == null;
+        return id == imagen.id;
     }
 
     //hash
     @Override
     public int hashCode() {
-        return lugar != null ? lugar.hashCode() : 0;
+        return id;
     }
 
     @Override
     public String toString() {
         return "Imagen{" +
-                "lugar=" + lugar +
+                "id=" + id +
+                ", lugar=" + lugar +
                 ", url='" + url + '\'' +
                 '}';
     }
