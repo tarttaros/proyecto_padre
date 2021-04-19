@@ -1,0 +1,15 @@
+insert into tipo_lugar(nombre_tipo_lugar) values ("Hotel");
+insert into tipo_lugar(nombre_tipo_lugar) values ("Bar");
+insert into tipo_lugar(nombre_tipo_lugar) values ("Restaurante");
+insert into ciudad_residencia(nombre_ciudad_residencia) values ("Armenia");
+insert into ciudad_residencia(nombre_ciudad_residencia) values ("Calarca");
+insert into ciudad_residencia(nombre_ciudad_residencia) values ("Montenegro");
+insert into usuario(contrasena,correo,direccion,edad,estado_cuenta,nickname,nombre,tipo_usuario,ciudad_residencia_codigo_ciudad_residencia) values ("123","123@lala","brrio 123",20,1,"el pepe","pepe",2,1);
+insert into usuario(contrasena,correo,direccion,edad,estado_cuenta,nickname,nombre,tipo_usuario,ciudad_residencia_codigo_ciudad_residencia) values ("1234","1234@lala","brrio 1234",20,1,"el nano","yuliam",0,2);
+insert into usuario(contrasena,correo,direccion,edad,estado_cuenta,nickname,nombre,tipo_usuario,ciudad_residencia_codigo_ciudad_residencia) values ("12345","12345@lala","brrio 12345",20,1,"el jalea","kevin",2,3);
+insert into lugar(descripcion,direccion,estado_lugar,nombre,numero_telefonico,autor_id,ciudad_residencia_codigo_ciudad_residencia,moderador_id,tipo_lugar_codigo_tipo_lugar) values ("1er lugar nuevo","brrio 123456",1,"lugar1","123456789",1,1,2,1);
+insert into lugar(descripcion,direccion,estado_lugar,nombre,numero_telefonico,autor_id,ciudad_residencia_codigo_ciudad_residencia,moderador_id,tipo_lugar_codigo_tipo_lugar) values ("2do lugar nuevo","brrio 234567",1,"lugar2","234567890",2,2,2,2);
+insert into lugar(descripcion,direccion,estado_lugar,nombre,numero_telefonico,autor_id,ciudad_residencia_codigo_ciudad_residencia,moderador_id,tipo_lugar_codigo_tipo_lugar) values ("3er lugar nuevo","brrio 345678",1,"lugar3","345678901",3,3,2,3);
+insert into favorito(lugar_id,usuario_id) values (1,1);
+insert into favorito(lugar_id,usuario_id) values (2,2);
+insert into favorito(lugar_id,usuario_id) values (3,3);

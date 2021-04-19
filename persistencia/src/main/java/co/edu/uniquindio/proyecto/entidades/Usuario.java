@@ -22,15 +22,15 @@ public class Usuario implements Serializable
     private String nickname;
 
     //contraseña del usuario
-    @Column(name = "contraseña", nullable = false, length = 20)
-    private String contraseña;
+    @Column(name = "contrasena", nullable = false, length = 20)
+    private String contrasena;
 
     //direccion del usuario (para encontrar su ubicacion)
     @Column(name = "direccion", nullable = false, length = 100)
     private String direccion;
 
     //correo del usuario
-    @Column(name = "correo", nullable = false, length = 25)
+    @Column(name = "correo", nullable = false, length = 100)
     private String correo;
 
     //edad del usuario
@@ -74,11 +74,11 @@ public class Usuario implements Serializable
     }
 
     //metodo constructor
-    public Usuario(String nombre, String nickname, String contraseña, String direccion, String correo, int edad,
+    public Usuario(String nombre, String nickname, String contrasena, String direccion, String correo, int edad,
                    EstadoCuenta estadoCuenta, TipoUsuario tipoUsuario, CiudadResidencia ciudadResidencia) {
         this.nombre = nombre;
         this.nickname = nickname;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.direccion = direccion;
         this.correo = correo;
         this.edad = edad;
@@ -118,13 +118,13 @@ public class Usuario implements Serializable
     }
 
     //obtener la contraseña
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
     //poner la contraseña
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     //obtener la direccion
@@ -260,7 +260,7 @@ public class Usuario implements Serializable
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", nickname='" + nickname + '\'' +
-                ", contraseña='" + contraseña + '\'' +
+                ", contrasena='" + contrasena + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", correo='" + correo + '\'' +
                 ", edad=" + edad +
