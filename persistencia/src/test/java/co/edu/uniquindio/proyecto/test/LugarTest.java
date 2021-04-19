@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class LugarTest
     @Autowired
     private CiudadResidenciaRepo ciudadResidenciaRepo;
 
+    /*
+    //metodo que agrega un lugar
     @Test
     public void registrarLugarTest()
     {
@@ -66,7 +69,52 @@ public class LugarTest
         //se comprueba de que si se haya guardado
         Assertions.assertNotNull(lugarGuardado);
     }
+     */
 
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void registrarLugarTest()
+    {
+        //se crea la ciudad
+        CiudadResidencia ciudad = new CiudadResidencia("Montenegro");
+
+        //se guarda el registro
+        CiudadResidencia ciudadResidenciaGuardado = ciudadResidenciaRepo.save(ciudad);
+
+        //se crea el usuario
+        Usuario usuario = new Usuario("yuliam","nano","nano1","brrio 123",
+                "nano@blablabla",16, EstadoCuenta.ACTIVA, TipoUsuario.USUARIO,ciudad);
+
+        //se guarda el registro
+        Usuario usuarioGuardado = usuarioRepo.save(usuario);
+
+        //se crea el usuario
+        Usuario usuario1 = new Usuario("josh","apa","apa1","brrio 1234",
+                "apa@blablabla",21, EstadoCuenta.ACTIVA, TipoUsuario.USUARIO,ciudad);
+
+        //se guarda el registro
+        Usuario usuarioGuardado1 = usuarioRepo.save(usuario1);
+
+        //se crea el tipo de lugar
+        TipoLugar tipoLugar = new TipoLugar("Hotel");
+
+        //se guarda el registro
+        TipoLugar tipoLugarGuardado = tipoLugarRepo.save(tipoLugar);
+
+        //se crea el lugar
+        Lugar lugar = new Lugar("5ta Sinfonia","3158589654",
+                "el mejor restaurante de comida europea","brrio 123",
+                EstadoLugar.PENDIENTE,usuario,usuario1,tipoLugar,ciudad);
+
+        //se guarda el registro
+        Lugar lugarGuardado = lugarRepo.save(lugar);
+
+        //se comprueba de que si se haya guardado
+        Assertions.assertNotNull(lugarGuardado);
+    }
+
+    /*
+    //metodo que elimina lugares
     @Test
     public void eliminarLugarTest()
     {
@@ -111,7 +159,25 @@ public class LugarTest
         Lugar lugarEliminado = lugarRepo.findById(1).orElse(null);
         Assertions.assertNull(lugarEliminado);
     }
+     */
 
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void eliminarLugarTest()
+    {
+        //se busca el registro a eliminar
+        Lugar lugar = lugarRepo.findById(1).orElse(null);
+
+        //se elimina el registro
+        lugarRepo.delete(lugar);
+
+        //se verifica que si haya sido borrado
+        Lugar lugarEliminado = lugarRepo.findById(1).orElse(null);
+        Assertions.assertNull(lugarEliminado);
+    }
+
+    /*
+    //metodo que actualiza un lugar
     @Test
     public void actualizarLugarTest()
     {
@@ -154,8 +220,33 @@ public class LugarTest
 
         //se guarda el registro
         lugarRepo.save(lugarGuardado);
+
+        //Por último, verificamos que si haya quedado actualizado
+        Lugar buscar = lugarRepo.findById(1).orElse(null);
+        Assertions.assertEquals(EstadoLugar.APROBADO, buscar.getEstadoLugar());
+    }
+     */
+
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void actualizarLugarTest()
+    {
+        //se busca el registro a modiicar
+        Lugar lugar = lugarRepo.findById(1).orElse(null);
+
+        //se cambia el estado del lugar de pendiente a aprobado
+        lugar.setEstadoLugar(EstadoLugar.APROBADO);
+
+        //se guarda el registro
+        lugarRepo.save(lugar);
+
+        //Por último, verificamos que si haya quedado actualizado
+        Lugar buscar = lugarRepo.findById(1).orElse(null);
+        Assertions.assertEquals(EstadoLugar.APROBADO, buscar.getEstadoLugar());
     }
 
+    /*
+    //metodo que lista los lugares
     @Test
     public void listarLugarTest()
     {
@@ -227,6 +318,18 @@ public class LugarTest
         //se guarda el registro
         Lugar lugarGuardado1 = lugarRepo.save(lugar1);
 
+        //se buscan todos los lugares
+        List<Lugar> lista = lugarRepo.findAll();
+
+        //se imprimen los lugares
+        System.out.println(lista);
+    }
+    */
+
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void listarLugarTest()
+    {
         //se buscan todos los lugares
         List<Lugar> lista = lugarRepo.findAll();
 
