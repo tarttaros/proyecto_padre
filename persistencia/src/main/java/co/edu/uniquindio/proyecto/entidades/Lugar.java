@@ -48,6 +48,9 @@ public class Lugar implements Serializable
     @ManyToOne
     private CiudadResidencia ciudadResidencia;
 
+    @OneToMany(mappedBy = "lugar")
+    private List<Horario> horario;
+
     //inverso de la relacion lugar-favorito
     @OneToMany(mappedBy = "lugar")
     private List<Favorito> favoritos;
@@ -180,7 +183,7 @@ public class Lugar implements Serializable
         this.id = id;
     }
 
-    //get del inverso de la relacion lugar-imagen
+    //obtiene las imagenes del lugar
     public List<Imagen> getImagenes() {
         return imagenes;
     }
@@ -190,7 +193,7 @@ public class Lugar implements Serializable
         this.imagenes = imagenes;
     }
 
-    //get del inverso de la relacion lugar-favorito
+    //obtiene los favoritos en los que esta el lugar
     public List<Favorito> getFavoritos() {
         return favoritos;
     }
@@ -200,7 +203,7 @@ public class Lugar implements Serializable
         this.favoritos = favoritos;
     }
 
-    //get del inverso de la relacion lugar-comentario
+    //obtiene los comentarios del lugar
     public List<Comentario> getComentarios() {
         return comentarios;
     }
@@ -208,6 +211,16 @@ public class Lugar implements Serializable
     //set del inverso de la relacion lugar-comentario
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
+    }
+
+    //obtiene la lista de horarios del lugar
+    public List<Horario> getHorario() {
+        return horario;
+    }
+
+    //set del inverso de la relacion lugar-horario
+    public void setHorario(List<Horario> horario) {
+        this.horario = horario;
     }
 
     //map
