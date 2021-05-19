@@ -25,8 +25,8 @@ public class Comentario implements Serializable
     @Column(name = "comentario", nullable = false, length = 150)
     private String comentario;
 
-    //calificacion hecha al local
-    @Column(name = "calificacion", nullable = true, precision = 1)
+    //calificacion hecha al local (al imprimir este dato hay que sumar uno)
+    @Column(name = "calificacion", nullable = false, precision = 1)
     private int calificacion;
 
     //metodo super
@@ -110,6 +110,7 @@ public class Comentario implements Serializable
         return id;
     }
 
+    //metodo to String
     @Override
     public String toString() {
         return "Comentario{" +

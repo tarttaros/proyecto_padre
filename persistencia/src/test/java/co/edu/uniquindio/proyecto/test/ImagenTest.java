@@ -71,7 +71,7 @@ public class ImagenTest
         //se guarda el registro
         Imagen imagenGuardada = imagenRepo.save(imagen);
 
-        //se guarda el registro
+        //se verifica el guardado del registro
         Assertions.assertNotNull(imagenGuardada);
     }
      */
@@ -120,7 +120,7 @@ public class ImagenTest
         //se guarda el registro
         Imagen imagenGuardada = imagenRepo.save(imagen);
 
-        //se guarda el registro
+        //se verifica el guardado del registro
         Assertions.assertNotNull(imagenGuardada);
     }
 

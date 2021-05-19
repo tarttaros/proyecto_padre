@@ -80,6 +80,7 @@ public class TipoLugar implements Serializable
         return codigoTipoLugar;
     }
 
+    //metodo to String
     @Override
     public String toString() {
         return "TipoLugar{" +

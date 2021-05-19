@@ -1,0 +1,13 @@
+insert into tipo_lugar(nombre_tipo_lugar) values ("Hotel");
+insert into ciudad_residencia(nombre_ciudad_residencia) values ("Armenia");
+insert into ciudad_residencia(nombre_ciudad_residencia) values ("Calarca");
+insert into usuario(contrasena,correo,direccion,edad,estado_cuenta,nickname,nombre,tipo_usuario,ciudad_residencia_codigo_ciudad_residencia) values ("123","123@lala","brrio 123",20,1,"el pepe","pepe",2,1);
+insert into usuario(contrasena,correo,direccion,edad,estado_cuenta,nickname,nombre,tipo_usuario,ciudad_residencia_codigo_ciudad_residencia) values ("1234","1234@lala","brrio 1234",20,1,"el nano","yuliam",0,2);
+insert into lugar(descripcion,direccion,estado_lugar,nombre,numero_telefonico,autor_id,ciudad_residencia_codigo_ciudad_residencia,moderador_id,tipo_lugar_codigo_tipo_lugar) values ("1er lugar nuevo","brrio 123456",1,"lugar1","123456789",1,1,2,1);
+insert into horario(dia,horaInicio,horaFinal,lugar) values ("lunes",'80000','200000',1);
+insert into horario(dia,horaInicio,horaFinal,lugar) values ("martes",'080000','200000',1);
+insert into horario(dia,horaInicio,horaFinal,lugar) values ("miercoles",'08:00:00','20:00:00',1);
+insert into horario(dia,horaInicio,horaFinal,lugar) values ("jueves",'08:00:00','20:00:00',1);
+insert into horario(dia,horaInicio,horaFinal,lugar) values ("viernes",'08:00:00','20:00:00',1);
+insert into horario(dia,horaInicio,horaFinal,lugar) values ("sabado",'08:00:00','16:00:00',1);
+insert into horario(dia,horaInicio,horaFinal,lugar) values ("domingo",'08:00:00','16:00:00',1);

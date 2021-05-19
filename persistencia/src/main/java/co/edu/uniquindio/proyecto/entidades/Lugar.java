@@ -30,6 +30,7 @@ public class Lugar implements Serializable
     private String direccion;
 
     //estado del lugar ( activo, inactivo o pendiente)
+    @JoinColumn(name = "estadoLugar", nullable = false)
     private EstadoLugar estadoLugar;
 
     //usuario que creo el perfil del lugar
@@ -48,6 +49,7 @@ public class Lugar implements Serializable
     @ManyToOne
     private CiudadResidencia ciudadResidencia;
 
+    //inverso de la relacion lugar-horario
     @OneToMany(mappedBy = "lugar")
     private List<Horario> horario;
 
@@ -240,6 +242,7 @@ public class Lugar implements Serializable
         return id;
     }
 
+    //metodo to string
     @Override
     public String toString() {
         return "Lugar{" +

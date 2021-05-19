@@ -38,9 +38,11 @@ public class Usuario implements Serializable
     private int edad;
 
     //estado de la cuenta de un usuario (activo - inactivo)
+    @JoinColumn(name = "estadoCuenta", nullable = false)
     private EstadoCuenta estadoCuenta;
 
     //tipo de usuario (administrador, moderador, usuario)
+    @JoinColumn(name = "tipoUsuario", nullable = false)
     private TipoUsuario tipoUsuario;
 
     //inverso de la relacion usuario-usuario
@@ -58,6 +60,10 @@ public class Usuario implements Serializable
     //inverso de la relacion usuario-favorito
     @OneToMany(mappedBy = "usuario")
     private List<Favorito> favoritos;
+
+    //inverso de la relacion usuario-comentario
+    @OneToMany(mappedBy = "usuario")
+    private List<Comentario> comentarios;
 
     //lista de usuarios a los que tiene acceso el administrador
     @ManyToOne
@@ -237,6 +243,16 @@ public class Usuario implements Serializable
         this.favoritos = favoritos;
     }
 
+    //get del inverso de la relacion usuario-comentario
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    //set del inverso de la relacion usuario-comentario
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
     //map
     @Override
     public boolean equals(Object o) {
@@ -254,6 +270,7 @@ public class Usuario implements Serializable
         return id;
     }
 
+    //metodo to String
     @Override
     public String toString() {
         return "Usuario{" +

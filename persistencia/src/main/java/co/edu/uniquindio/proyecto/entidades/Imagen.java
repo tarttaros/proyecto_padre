@@ -79,6 +79,7 @@ public class Imagen implements Serializable
         return id;
     }
 
+    //metodo to String
     @Override
     public String toString() {
         return "Imagen{" +

@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 @Entity
 public class Favorito implements Serializable {
+
     //primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,6 +78,7 @@ public class Favorito implements Serializable {
         return id;
     }
 
+    //metodo to String
     @Override
     public String toString() {
         return "Favorito{" +

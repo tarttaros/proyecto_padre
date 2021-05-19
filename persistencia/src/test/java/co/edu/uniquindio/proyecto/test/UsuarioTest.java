@@ -24,7 +24,7 @@ public class UsuarioTest
     @Autowired
     private CiudadResidenciaRepo ciudadResidenciaRepo;
 
-    /*
+/*
     //etodo que agrega un usuario
     @Test
     public void registrarUsuarioTest()
@@ -45,8 +45,8 @@ public class UsuarioTest
         //se comprueba de que si se haya guardado
         Assertions.assertNotNull(usuarioGuardado);
     }
-     */
 
+*/
     @Test
     @Sql("classpath:Usuarios.sql")
     public void registrarUsuarioTest()

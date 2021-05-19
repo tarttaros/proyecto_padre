@@ -1,7 +1,5 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -95,6 +93,7 @@ public class CiudadResidencia implements Serializable
         return codigoCiudadResidencia;
     }
 
+    //metodo to String
     @Override
     public String toString() {
         return "CiudadResidencia{" +
