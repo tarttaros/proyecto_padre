@@ -1,5 +1,7 @@
 package co.edu.uniquindio.proyecto.test;
 
+import ch.qos.logback.core.joran.spi.ConsoleTarget;
+import co.edu.uniquindio.proyecto.DTO.datosLugarDadaHoraDTO;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.CiudadResidenciaRepo;
 import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
@@ -12,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.Date;
 import java.util.List;
 
 @DataJpaTest
@@ -326,6 +329,7 @@ public class LugarTest
     }
     */
 
+    //metodo que lista todos los lugares
     @Test
     @Sql("classpath:Lugares.sql")
     public void listarLugarTest()
@@ -335,5 +339,178 @@ public class LugarTest
 
         //se imprimen los lugares
         System.out.println(lista);
+    }
+
+    //imprime los locales de una ciudad
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void lugaresPorCiudadTest()
+    {
+        //nombre de la ciudad en la cual se va a hacer la busqueda
+        String nombreCiudad = "Montenegro";
+
+        //se buscan los locales de esa ciudad
+        List<Lugar> lugares = lugarRepo.lugaresPorCiudad(nombreCiudad);
+
+        //se imprimen los locales de esa ciudad
+        for(Lugar l : lugares)
+        {
+            System.out.println(l);
+        }
+    }
+
+    //imprime los lugares de cierto tipo
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void lugaresPorTipoTest()
+    {
+        //tipo del local que se va a buscar
+        String tipoLugar = "restaurante";
+
+        //se buscan los locales de ese tipó
+        List<Lugar> lugares = lugarRepo.lugaresPorTipo(tipoLugar);
+
+        //se imprimen los locales de ese tipo
+        for(Lugar l : lugares)
+        {
+            System.out.println(l);
+        }
+    }
+
+    //imprime los lugares que aprobo un moderador
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void lugaresPorModeradorTest()
+    {
+        //booleano que define si es o no moderador
+        boolean esModerador = false;
+
+        //nombre del moderador que aprobo el local
+        String nombreModerador = "yuliam";
+
+        //se obtienen los moderadores y administradores
+        List<Usuario> usuarios = usuarioRepo.administradoresYModeradores(TipoUsuario.ADMINISTRADOR,TipoUsuario.MODERADOR);
+
+        //se recorre la lista de moderadores y administradores buscando el nombre
+        for (Usuario u : usuarios)
+        {
+            if(u.getNombre().equals(nombreModerador))
+            {
+                esModerador = true;
+            }
+        }
+
+        //en caso de que si sea moderador
+        if (esModerador)
+        {
+            //se buscan los locales aprobados por este moderador
+            List<Lugar> lugares = lugarRepo.lugaresPorModerador(nombreModerador,EstadoLugar.APROBADO);
+
+            //se imprimen los locales de ese moderador
+            for(Lugar l : lugares)
+            {
+                System.out.println(l);
+            }
+        }
+        else
+        {
+            System.out.println(nombreModerador+" No es un moderador");
+        }
+    }
+
+    //se obtiene el tipo de lugar de un id determinado
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void tipoLugarPorIdTest()
+    {
+        //id del local
+        int id = 1 ;
+
+        //se busca el tipo de local segun el id
+        List<TipoLugar> lista = lugarRepo.tipoLugarPorId(id);
+
+        //se imprime los tipos de lugares de un local
+        for(TipoLugar t : lista)
+        {
+            System.out.println(t);
+        }
+    }
+
+    //se obtienen los lugares y sus devidos comentarios
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void lugaresYComentariosTest()
+    {
+        //se obtienen los lugares y sus comentarios
+        List<Object[]> lista = lugarRepo.lugaresYComentarios();
+
+        //se imprimen los lugares y sus comentarios
+        for (int i = 0; i < lista.size(); i++)
+        {
+            for (int j = 0; j < lista.get(i).length; j++)
+                System.out.println(lista.get(i)[j]);
+        }
+    }
+
+    //se obtienen datos de un lugar que sea aprobado por un moderador dado su correo
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void datosLugarAprobadoPorModeradorTest()
+    {
+        //booleano que define si es o no moderador
+        boolean esModerador = false;
+
+        //nombre del moderador que aprobo el local
+        String correoModerador = "1234@lala";
+
+        //se obtienen los moderadores y administradores
+        List<Usuario> usuarios = usuarioRepo.administradoresYModeradores(TipoUsuario.ADMINISTRADOR,TipoUsuario.MODERADOR);
+
+        //se recorre la lista de moderadores y administradores buscando el nombre
+        for (Usuario u : usuarios)
+        {
+            if(u.getCorreo().equals(correoModerador))
+            {
+                esModerador = true;
+            }
+        }
+
+        //en caso de que si sea moderador
+        if (esModerador)
+        {
+            //se buscan los locales aprobados por este moderador
+            List<Object[]> lista = lugarRepo.datosLugarAprobadoPorModerador(correoModerador,EstadoLugar.APROBADO);
+
+            //se imprimen los lugares y sus comentarios
+            for (int i = 0; i < lista.size(); i++)
+            {
+                for (int j = 0; j < lista.get(i).length; j++)
+                    System.out.println(lista.get(i)[j]);
+            }
+        }
+        else
+        {
+            System.out.println(correoModerador+" No es el correo de un moderador");
+        }
+    }
+
+    //datos de un lugar dada una hora
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void datosLugarDadaHoraTest()
+    {
+        //dia de la semana
+        String dia = "lunes";
+
+        //hora dada
+        Date hora = new Date(0,0,0,9,0,0);
+
+        //obtenemos los datos segun la hora
+        List<datosLugarDadaHoraDTO> lista = lugarRepo.datosLugarDadaHora(dia,hora,hora);
+
+        for(datosLugarDadaHoraDTO l : lista)
+        {
+            System.out.println("Nombre: "+l.getLugar().getNombre() +" Descripcion: "+l.getLugar().getDescripcion()+" Direccion: "+l.getLugar().getDireccion());
+        }
     }
 }

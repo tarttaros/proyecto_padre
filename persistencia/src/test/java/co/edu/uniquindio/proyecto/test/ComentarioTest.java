@@ -13,8 +13,7 @@ import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class ComentarioTest
-{
+public class ComentarioTest {
     @Autowired
     private ComentarioRepo comentarioRepo;
     @Autowired
@@ -92,8 +91,7 @@ public class ComentarioTest
 
     @Test
     @Sql("classpath:Comentarios.sql")
-    public void agregarComentarioTest()
-    {
+    public void agregarComentarioTest() {
         //se crea la ciudad
         CiudadResidencia ciudad = new CiudadResidencia("Montenegro");
 
@@ -101,15 +99,15 @@ public class ComentarioTest
         CiudadResidencia ciudadResidenciaGuardado = ciudadResidenciaRepo.save(ciudad);
 
         //se crea el usuario
-        Usuario usuario1 = new Usuario("josh","apa","apa1","brrio 1234",
-                "apa@blablabla",21, EstadoCuenta.ACTIVA, TipoUsuario.USUARIO,ciudad);
+        Usuario usuario1 = new Usuario("josh", "apa", "apa1", "brrio 1234",
+                "apa@blablabla", 21, EstadoCuenta.ACTIVA, TipoUsuario.USUARIO, ciudad);
 
         //se guarda el registro
         Usuario usuarioGuardado1 = usuarioRepo.save(usuario1);
 
         //se crea el usuario
-        Usuario usuario2 = new Usuario("jhonatan","buche","buche1","brrio 12356",
-                "buche@blablabla",24, EstadoCuenta.ACTIVA, TipoUsuario.USUARIO,ciudad);
+        Usuario usuario2 = new Usuario("jhonatan", "buche", "buche1", "brrio 12356",
+                "buche@blablabla", 24, EstadoCuenta.ACTIVA, TipoUsuario.USUARIO, ciudad);
 
         //se guarda el registro
         Usuario usuarioGuardado2 = usuarioRepo.save(usuario2);
@@ -121,16 +119,16 @@ public class ComentarioTest
         TipoLugar tipoLugarGuardado = tipoLugarRepo.save(tipoLugar);
 
         //se crea el lugar
-        Lugar lugar = new Lugar("5ta Sinfonia","3158589654",
-                                "el mejor restaurante de comida europea","brrio 123",
-                                EstadoLugar.PENDIENTE,usuario1,usuario2,tipoLugar,ciudad);
+        Lugar lugar = new Lugar("5ta Sinfonia", "3158589654",
+                "el mejor restaurante de comida europea", "brrio 123",
+                EstadoLugar.PENDIENTE, usuario1, usuario2, tipoLugar, ciudad);
 
         //se guarda el registro
         Lugar lugarGuardado = lugarRepo.save(lugar);
 
         //se crea el comentario
-        Comentario comentario = new Comentario(lugar,usuario2,"muy bueno el lugar y cuenta con una excelente atencion",
-                                            5);
+        Comentario comentario = new Comentario(lugar, usuario2, "muy bueno el lugar y cuenta con una excelente atencion",
+                5);
 
         //se guarda el registro
         Comentario comentarioGuardado = comentarioRepo.save(comentario);
@@ -209,8 +207,7 @@ public class ComentarioTest
 
     @Test
     @Sql("classpath:Comentarios.sql")
-    public void eliminarComentariotest()
-    {
+    public void eliminarComentariotest() {
         //se busca el registro a eliminar
         Comentario comentario = comentarioRepo.findById(3).orElse(null);
 
@@ -295,8 +292,7 @@ public class ComentarioTest
 
     @Test
     @Sql("classpath:Comentarios.sql")
-    public void actualizarComentarioTest()
-    {
+    public void actualizarComentarioTest() {
         //se busca el registro a modificar
         Comentario comentario = comentarioRepo.findById(1).orElse(null);
 
@@ -433,6 +429,7 @@ public class ComentarioTest
     }
      */
 
+    //listar todos los comentarios
     @Test
     @Sql("classpath:Comentarios.sql")
     public void listarComentariosTest()
@@ -443,4 +440,73 @@ public class ComentarioTest
         //se imprime la lista
         System.out.println(lista);
     }
+
+    //busqueda de comentarios por una cierta calificacion
+    @Test
+    @Sql("classpath:Comentarios.sql")
+    public void comentariosPorCalificacionTest()
+    {
+        //calificacion a evaluar
+        int calificacion = 3;
+
+        //se buscan todos los comentarios
+        List<Comentario> lista = comentarioRepo.comentariosPorCalificacion(calificacion);
+
+        //se imprimen los comentarios
+        for (Comentario c : lista) {
+            System.out.println(c);
+        }
+    }
+
+    //busqueda de todos los comentarios de cierto usuario
+    @Test
+    @Sql("classpath:Comentarios.sql")
+    public void comentariosPorUsuarioTest()
+    {
+        //nombre del usuario al que le vamos a buscar los comentarios
+        String nombreUsuario = "yuliam";
+
+        //se buscan todos los comentarios
+        List<Comentario> lista = comentarioRepo.comentariosPorUsuario(nombreUsuario);
+
+        //se imprimen los comentarios
+        for (Comentario c : lista) {
+            System.out.println(c);
+        }
+    }
+
+    //comentarios relacionados a un lugar
+    @Test
+    @Sql("classpath:Comentarios.sql")
+    public void comentariosPorLugarTest()
+    {
+        //nombre del lugar que vamos a buscar calificacion
+        String nombreLugar = "lugar3";
+
+        //se buscan todos los comentarios
+        List<Comentario> lista = comentarioRepo.comentariosPorLugar(nombreLugar);
+
+        //se imprimen los comentarios
+        for (Comentario c : lista) {
+            System.out.println(c);
+        }
+    }
+
+    //usuarios que comentaron un lugar en especifico
+    @Test
+    @Sql("classpath:Comentarios.sql")
+    public void usuariosComentaronLugarTest()
+    {
+        //Nombre del local
+        String nombre = "lugar1";
+
+        List<Usuario> lista = comentarioRepo.usuariosComentaronLugar(nombre);
+
+        for (Usuario u : lista)
+        {
+            System.out.println(u);
+        }
+
+    }
+
 }

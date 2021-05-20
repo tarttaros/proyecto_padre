@@ -211,6 +211,7 @@ public class UsuarioTest
     }
     */
 
+    //lista todos los usuarios
     @Test
     @Sql("classpath:Usuarios.sql")
     public void listarUsuariosTest()
@@ -221,5 +222,22 @@ public class UsuarioTest
         //Imprimimos la lista
         System.out.println(lista);
     }
+
+    //obtiene el correo de cada usuario y sus lugares creados
+    @Test
+    @Sql("classpath:Usuarios.sql")
+    public void correosUsuariosAutoresTest()
+    {
+        //se obtiene el correo de los usuarios y los lugares que han creado.
+        List<Object[]> lista = usuarioRepo.correosUsuariosAutores();
+
+        for(int i = 0; i < lista.size(); i++)
+        {
+            for (int j = 0; j < lista.get(i).length; j++)
+            System.out.println(lista.get(i)[j]);
+        }
+    }
+
+
 
 }

@@ -26,7 +26,7 @@ public class Comentario implements Serializable
     private String comentario;
 
     //calificacion hecha al local (al imprimir este dato hay que sumar uno)
-    @Column(name = "calificacion", nullable = false, precision = 1)
+    @Column(name = "calificacion", nullable = true, precision = 1)
     private int calificacion;
 
     //metodo super

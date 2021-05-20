@@ -437,6 +437,7 @@ public class FavoritoTest
     }
      */
 
+    //listar todos los favoritos
     @Test
     @Sql("classpath:Favoritos.sql")
     public void listarFavoritosTest()
@@ -446,5 +447,23 @@ public class FavoritoTest
 
         //se imprime la lista
         System.out.println(lista);
+    }
+
+    //mostrar lugares favoritos de un usuario (por su correo)
+    @Test
+    @Sql("classpath:Favoritos.sql")
+    public void lugaresFavoritosUsuarioTest()
+    {
+        //correo del usuario
+        String correoUsuario = "1234@lala";
+
+        //se buscan todos los lugares favoritos
+        List<Lugar> lista = favoritoRepo.favoritosUsuario(correoUsuario);
+
+        //se imprime la lista
+        for(Lugar l : lista)
+        {
+            System.out.println(lista);
+        }
     }
 }
