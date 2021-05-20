@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 @DataJpaTest
@@ -27,7 +28,7 @@ public class HorarioTest
     @Autowired
     private CiudadResidenciaRepo ciudadResidenciaRepo;
 
-
+    /*
     //metodo de prueba del guardado de un horario de cierto local
     @Test
     public void agregarHorarioTest()
@@ -67,46 +68,23 @@ public class HorarioTest
         Lugar lugarGuardado = lugarRepo.save(lugar);
 
         //se crea la hora de apertura
-        Time horaInicial = Time.valueOf("8:00:00");
+        Date horaInicial = Time.valueOf("08:00:00");
 
         //se crea la hora de cierre
-        Time horaFinal = Time.valueOf("20:00:00");
+        Date horaFinal = Time.valueOf("20:00:00");
 
         //se crea el registro
         Horario horario = new Horario("lunes",horaInicial,horaFinal,lugar);
 
         //se guarda el registro
         Horario horarioGuardado = horarioRepo.save(horario);
-/*
-        //se crea el horario 2
-        Horario horario1= new Horario("martes",horaInicial,horaFinal,lugar);
 
-        //se guarda el horario 2
-        Horario horarioGuardado1 = horarioRepo.save(horario1);
-
-        //se crea el horario 3
-        Horario horario2 = new Horario("miercoles",horaInicial,horaFinal,lugar);
-
-        //se guarda el horario 3
-        Horario horarioGuardado2 = horarioRepo.save(horario2);
-
-        //se crea el horario 4
-        Horario horario3 = new Horario("jueves",horaInicial,horaFinal,lugar);
-
-        //se guarda el horario 4
-        Horario horarioGuardado3 = horarioRepo.save(horario3);
-
-        //se crea el horario 5
-        Horario horario4 = new Horario("viernes",horaInicial,horaFinal,lugar);
-
-        //se guarda el horario 5
-        Horario horarioGuardado4 = horarioRepo.save(horario4);
-//*/
         //se verifica el guardado del registro
         Assertions.assertNotNull(horarioGuardado);
     }
 
-/*
+    */
+
     @Test
     @Sql("classpath:Horarios.sql")
     public void agregarHorarioTest()
@@ -146,46 +124,23 @@ public class HorarioTest
         Lugar lugarGuardado = lugarRepo.save(lugar);
 
         //se crea la hora de apertura
-        Time horaInicial = Time.valueOf("8:00:00");
+        Date horaInicial = Time.valueOf("08:00:00");
 
         //se crea la hora de cierre
-        Time horaFinal = Time.valueOf("20:00:00");
+        Date horaFinal = Time.valueOf("20:00:00");
 
         //se crea el registro
         Horario horario = new Horario("lunes",horaInicial,horaFinal,lugar);
 
         //se guarda el registro
         Horario horarioGuardado = horarioRepo.save(horario);
-/*
-        //se crea el horario 2
-        Horario horario1= new Horario("martes",horaInicial,horaFinal,lugar);
-
-        //se guarda el horario 2
-        Horario horarioGuardado1 = horarioRepo.save(horario1);
-
-        //se crea el horario 3
-        Horario horario2 = new Horario("miercoles",horaInicial,horaFinal,lugar);
-
-        //se guarda el horario 3
-        Horario horarioGuardado2 = horarioRepo.save(horario2);
-
-        //se crea el horario 4
-        Horario horario3 = new Horario("jueves",horaInicial,horaFinal,lugar);
-
-        //se guarda el horario 4
-        Horario horarioGuardado3 = horarioRepo.save(horario3);
-
-        //se crea el horario 5
-        Horario horario4 = new Horario("viernes",horaInicial,horaFinal,lugar);
-
-        //se guarda el horario 5
-        Horario horarioGuardado4 = horarioRepo.save(horario4);
 
         //se verifica el guardado del registro
         Assertions.assertNotNull(horarioGuardado);
     }
-*/
 
+
+    /*
     //metodo de prueba de la eliminacion de un horario de cierto local
     @Test
     public void eliminarHorarioTest()
@@ -225,10 +180,10 @@ public class HorarioTest
         Lugar lugarGuardado = lugarRepo.save(lugar);
 
         //se crea la hora de apertura
-        Time horaInicial = Time.valueOf("8:00:00");
+        Date horaInicial = Time.valueOf("08:00:00");
 
         //se crea la hora de cierre
-        Time horaFinal = Time.valueOf("20:00:00");
+        Date horaFinal = Time.valueOf("20:00:00");
 
         //se crea el registro
         Horario horario = new Horario("lunes",horaInicial,horaFinal,lugar);
@@ -243,7 +198,25 @@ public class HorarioTest
         Horario horarioEliminado = horarioRepo.findById(1).orElse(null);
         Assertions.assertNull(horarioEliminado);
     }
+    */
+    //metodo de prueba de la eliminacion de un horario de cierto local
+    @Test
+    @Sql("classpath:Horarios.sql")
+    public void eliminarHorarioTest()
+    {
+        //se busca el horario a eliminar
+        Horario horarioGuardado = horarioRepo.findById(1).orElse(null);
 
+        //se elimina el registro
+        horarioRepo.delete(horarioGuardado);
+
+        //se verifica que si haya sido borrado
+        Horario horarioEliminado = horarioRepo.findById(1).orElse(null);
+        Assertions.assertNull(horarioEliminado);
+    }
+
+
+    /*
     @Test
     public void actualizarHorarioTest()
     {
@@ -282,10 +255,10 @@ public class HorarioTest
         Lugar lugarGuardado = lugarRepo.save(lugar);
 
         //se crea la hora de apertura
-        Time horaInicial = Time.valueOf("8:00:00");
+        Date horaInicial = Time.valueOf("08:00:00");
 
         //se crea la hora de cierre
-        Time horaFinal = Time.valueOf("20:00:00");
+        Date horaFinal = Time.valueOf("20:00:00");
 
         //se crea el registro
         Horario horario = new Horario("lunes",horaInicial,horaFinal,lugar);
@@ -306,7 +279,28 @@ public class HorarioTest
         Horario buscar = horarioRepo.findById(1).orElse(null);
         Assertions.assertEquals("martes", buscar.getDia());
     }
+    */
 
+    @Test
+    @Sql("classpath:Horarios.sql")
+    public void actualizarHorarioTest()
+    {
+        //se busca el registro a modificar
+        Horario horarioEditar = horarioRepo.findById(1).orElse(null);
+
+        //se modifica el horario
+        horarioEditar.setDia("martes");
+
+        //se guarda el registro
+        horarioRepo.save(horarioEditar);
+
+        //Por último, verificamos que si haya quedado actualizado
+        Horario buscar = horarioRepo.findById(1).orElse(null);
+        Assertions.assertEquals("martes", buscar.getDia());
+    }
+
+
+    /*
     @Test
     public void listarHorariosTest()
     {
@@ -345,10 +339,10 @@ public class HorarioTest
         Lugar lugarGuardado = lugarRepo.save(lugar);
 
         //se crea la hora de apertura
-        Time horaInicial = Time.valueOf("8:00:00");
+        Date horaInicial = Time.valueOf("08:00:00");
 
         //se crea la hora de cierre
-        Time horaFinal = Time.valueOf("20:00:00");
+        Date horaFinal = Time.valueOf("20:00:00");
 
         //se crea el registro
         Horario horario = new Horario("lunes",horaInicial,horaFinal,lugar);
@@ -386,4 +380,17 @@ public class HorarioTest
         //se imprimen todos los horarios
         System.out.println(lista);
     }
+     */
+
+    @Test
+    @Sql("classpath:Horarios.sql")
+    public void listarHorariosTest()
+    {
+        //se buscan todos los horarios
+        List<Horario> lista = horarioRepo.findAll();
+
+        //se imprimen todos los horarios
+        System.out.println(lista);
+    }
+
 }

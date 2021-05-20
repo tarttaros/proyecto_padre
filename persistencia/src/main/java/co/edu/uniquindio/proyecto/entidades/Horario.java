@@ -2,7 +2,7 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Time;
+import java.util.Date;
 
 @Entity
 public class Horario implements Serializable
@@ -19,11 +19,13 @@ public class Horario implements Serializable
 
     //hora de apertura
     @Column(name = "horaInicio", nullable = false)
-    private Time horaInicio;
+    @Temporal(TemporalType.TIME)
+    private Date horaInicio;
 
     //hora de cierre
     @Column(name = "horaFinal", nullable = false)
-    private Time horaFinal;
+    @Temporal(TemporalType.TIME)
+    private Date horaFinal;
 
     //local al que le hicieron el comentario
     @ManyToOne
@@ -36,7 +38,7 @@ public class Horario implements Serializable
     }
 
     //metodo constructor
-    public Horario(String dia, Time horaInicio, Time horaFinal, Lugar lugar) {
+    public Horario(String dia, Date horaInicio, Date horaFinal, Lugar lugar) {
         this.dia = dia;
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
@@ -64,22 +66,22 @@ public class Horario implements Serializable
     }
 
     //obtiene la hora de apertura del local
-    public Time getHoraInicio() {
+    public Date getHoraInicio() {
         return horaInicio;
     }
 
     //pone la hora de apertura del local
-    public void setHoraInicio(Time horaInicio) {
+    public void setHoraInicio(Date horaInicio) {
         this.horaInicio = horaInicio;
     }
 
     //obtiene la hora de cierre del local
-    public Time getHoraFinal() {
+    public Date getHoraFinal() {
         return horaFinal;
     }
 
     //pone la hora de cierre del local
-    public void setHoraFinal(Time horaFinal) {
+    public void setHoraFinal(Date horaFinal) {
         this.horaFinal = horaFinal;
     }
 
