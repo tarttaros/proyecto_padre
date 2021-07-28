@@ -30,4 +30,7 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Integer>
 
     @Query("select u.correo, l from Usuario u left join u.lugaresCreados l ")
     List<Object[]> correosUsuariosAutores();
+
+    @Query("select u from Usuario u order by u.nombre asc ")
+    List<Usuario> usuariosPorNombre();
 }

@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.test;
 
-import ch.qos.logback.core.joran.spi.ConsoleTarget;
-import co.edu.uniquindio.proyecto.DTO.datosLugarDadaHoraDTO;
+import co.edu.uniquindio.proyecto.DTO.DatosLugarDTO;
+import co.edu.uniquindio.proyecto.DTO.DatosLugarTipoLugarDTO;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.CiudadResidenciaRepo;
 import co.edu.uniquindio.proyecto.repositorios.LugarRepo;
@@ -29,6 +29,7 @@ public class LugarTest
     private TipoLugarRepo tipoLugarRepo;
     @Autowired
     private CiudadResidenciaRepo ciudadResidenciaRepo;
+
 
     /*
     //metodo que agrega un lugar
@@ -506,11 +507,24 @@ public class LugarTest
         Date hora = new Date(0,0,0,9,0,0);
 
         //obtenemos los datos segun la hora
-        List<datosLugarDadaHoraDTO> lista = lugarRepo.datosLugarDadaHora(dia,hora,hora);
+        List<DatosLugarDTO> lista = lugarRepo.datosLugarDadaHora(dia,hora,hora);
 
-        for(datosLugarDadaHoraDTO l : lista)
+        for(DatosLugarDTO l : lista)
         {
             System.out.println("Nombre: "+l.getLugar().getNombre() +" Descripcion: "+l.getLugar().getDescripcion()+" Direccion: "+l.getLugar().getDireccion());
+        }
+    }
+
+    //datos lugar por tipo de lugar
+    @Test
+    @Sql("classpath:Lugares.sql")
+    public void datosLugarOrdenadosPorTipoLugarTest()
+    {
+        List<DatosLugarTipoLugarDTO> lista = lugarRepo.datosLugarOrdenadosPorTipoLugar();
+
+        for (DatosLugarTipoLugarDTO l : lista)
+        {
+            System.out.println("Id del local: "+l.getLugar().getId()+" Nombre: "+l.getLugar().getNombre()+" Nombre de la Ciudad: "+l.getLugar().getCiudadResidencia().getNombreCiudadResidencia()+" Cantidad de lugares: "+l.getCantidadLugares());
         }
     }
 }

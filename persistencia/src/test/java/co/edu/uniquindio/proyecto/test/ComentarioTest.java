@@ -25,6 +25,19 @@ public class ComentarioTest {
     @Autowired
     private CiudadResidenciaRepo ciudadResidenciaRepo;
 
+    //cantidad de comentarios de un local
+    @Test
+    @Sql("classpath:Comentarios.sql")
+    public void cantidadComentariosLocalTest()
+    {
+        //nombre del local
+        String nombre = "lugar1";
+
+        //cantidad de comentarios de un local
+        int cantidad = comentarioRepo.cantidadComentariosLugar(nombre);
+
+        System.out.println(cantidad);
+    }
     /*
     //metodo de prueba para agregar un comentario
     @Test

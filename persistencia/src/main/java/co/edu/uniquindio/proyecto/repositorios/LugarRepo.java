@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
-import co.edu.uniquindio.proyecto.DTO.datosLugarDadaHoraDTO;
+import co.edu.uniquindio.proyecto.DTO.DatosLugarDTO;
+import co.edu.uniquindio.proyecto.DTO.DatosLugarTipoLugarDTO;
 import co.edu.uniquindio.proyecto.entidades.EstadoLugar;
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 import co.edu.uniquindio.proyecto.entidades.TipoLugar;
@@ -33,7 +34,9 @@ public interface LugarRepo extends JpaRepository<Lugar, Integer>
     @Query("select l.nombre,l.descripcion,l.ciudadResidencia,l.tipoLugar from Lugar l where l.moderador.correo = :correoModerador and l.estadoLugar = :estadoLugar")
     List<Object[]> datosLugarAprobadoPorModerador(@Param("correoModerador") String correoModerador, @Param("estadoLugar") EstadoLugar estadoLugar);
 
-    @Query("select new co.edu.uniquindio.proyecto.DTO.datosLugarDadaHoraDTO(l) from Lugar l join l.horario h where h.dia = :diaSemana and h.horaInicio < :hora and h.horaFinal > :hora1")
-    List<datosLugarDadaHoraDTO> datosLugarDadaHora(@Param("diaSemana") String diaSemana, @Param("hora") Date hora, @Param("hora1") Date hora1);
+    @Query("select new co.edu.uniquindio.proyecto.DTO.DatosLugarDTO(l) from Lugar l join l.horario h where h.dia = :diaSemana and h.horaInicio < :hora and h.horaFinal > :hora1")
+    List<DatosLugarDTO> datosLugarDadaHora(@Param("diaSemana") String diaSemana, @Param("hora") Date hora, @Param("hora1") Date hora1);
 
+    @Query("select new co.edu.uniquindio.proyecto.DTO.DatosLugarTipoLugarDTO(l,count (l)) from Lugar l group by l.tipoLugar")
+    List<DatosLugarTipoLugarDTO> datosLugarOrdenadosPorTipoLugar();
 }

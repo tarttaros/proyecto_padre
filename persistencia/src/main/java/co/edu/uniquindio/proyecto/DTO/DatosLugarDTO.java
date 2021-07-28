@@ -2,11 +2,11 @@ package co.edu.uniquindio.proyecto.DTO;
 
 import co.edu.uniquindio.proyecto.entidades.Lugar;
 
-public class datosLugarDadaHoraDTO
+public class DatosLugarDTO
 {
     Lugar lugar;
 
-    public datosLugarDadaHoraDTO(Lugar lugar)
+    public DatosLugarDTO(Lugar lugar)
     {
         this.lugar = lugar;
     }

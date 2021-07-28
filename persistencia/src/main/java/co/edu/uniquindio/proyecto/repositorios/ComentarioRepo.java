@@ -23,4 +23,7 @@ public interface ComentarioRepo extends JpaRepository<Comentario, Integer>
 
     @Query("select distinct u from Comentario c inner join c.usuario u where c.lugar.nombre = :nombreLugar")
     List<Usuario> usuariosComentaronLugar(@Param("nombreLugar") String nombreLugar);
+
+    @Query("select count (c) from Comentario c where c.lugar.nombre = :nombreLocal")
+    int cantidadComentariosLugar(@Param("nombreLocal") String nombreLocal);
 }

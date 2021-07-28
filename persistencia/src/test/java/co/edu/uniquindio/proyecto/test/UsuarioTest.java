@@ -24,6 +24,20 @@ public class UsuarioTest
     @Autowired
     private CiudadResidenciaRepo ciudadResidenciaRepo;
 
+    //lista los usuarios por nombre
+    @Test
+    @Sql("classpath:Usuarios.sql")
+    public void usuariosPorNombreTest()
+    {
+        //se listan los usuarios por su nombre
+        List<Usuario> lista = usuarioRepo.usuariosPorNombre();
+
+        //se imprimen
+        for (Usuario u :lista)
+        {
+            System.out.println(u);
+        }
+    }
 /*
     //etodo que agrega un usuario
     @Test
@@ -209,6 +223,7 @@ public class UsuarioTest
         //Imprimimos la lista
         System.out.println(lista);
     }
+
     */
 
     //lista todos los usuarios
